@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Mone_can & Arohan Rental</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <svg style="display:none" aria-hidden="true">
+    <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.9c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1.1L6.6 10.8z"/></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+    <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8.5h-2c-.6 0-1 .5-1 1V12h3l-.4 3H12v7h-3v-7H7v-3h2V9c0-2.2 1.4-4 4-4h2v3.5z"/></symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M8.5 8.8c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.4.2.5.6 1.5.6 1.6.1.1.1.3 0 .4-.1.2-.2.3-.3.4-.1.2-.3.3-.1.6.2.4 1 1.5 2.1 2.1.3.2.5.1.6-.1.2-.2.5-.6.7-.8.2-.2.3-.2.5-.1.2.1 1.3.6 1.5.7.2.1.4.2.4.3.1.4 0 .8-.2 1.1-.2.3-1 .8-1.8.8-1.7 0-3.6-1.1-4.8-2.3-1.2-1.2-2-2.6-2-3.9 0-.5.1-.9.3-1.2z"/></symbol>
+    <symbol id="icon-camera" viewBox="0 0 100 100"><rect x="10" y="30" width="80" height="55" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M35 30 L42 18 H58 L65 30" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="50" cy="58" r="18" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="50" cy="58" r="8" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="78" cy="40" r="3" fill="currentColor"/></symbol>
+    <symbol id="icon-floodlight" viewBox="0 0 100 100"><rect x="28" y="42" width="44" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><line x1="50" y1="72" x2="50" y2="88" stroke="currentColor" stroke-width="3"/><line x1="34" y1="88" x2="66" y2="88" stroke="currentColor" stroke-width="3"/><path d="M28 48 L8 28 M50 42 L50 10 M72 48 L92 28" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="57" r="8" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  </svg>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo"><span class="nl-1">Mone_can</span><span class="nl-sep">&amp;</span><span class="nl-2">Arohan Rental</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="photography.html">Photography</a>
+      <a href="floodlights.html">Flood Lights</a><a href="about.html" class="active">About</a><a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Book Now</a>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="toggleMenu()">Home</a><a href="photography.html" onclick="toggleMenu()">Photography</a>
+    <a href="floodlights.html" onclick="toggleMenu()">Flood Lights</a><a href="about.html" onclick="toggleMenu()">About</a><a href="contact.html" onclick="toggleMenu()">Contact</a>
+  </div>
+
+  <section class="page-hero about-hero">
+    <div class="hero-content">
+      <p class="eyebrow">Our Story</p>
+      <h1>Built on Passion.<br><em>Driven by Purpose.</em></h1>
+      <p>Two businesses. One vision. Rooted in Goa.</p>
+    </div>
+  </section>
+
+  <section class="sec bg-dark">
+    <div class="story-grid">
+      <div class="story-img-box">
+        <div class="story-ph"><img src="images/self.jpg" alt="Founder"></div>
+      </div>
+      <div class="story-text">
+        <p class="label">The Founder</p>
+        <h2 class="story-h">A Passion That Became a Profession</h2>
+        <p class="body-p">It started with a camera and a genuine love for capturing moments that words cannot fully describe. Long before photography became a business, it was a personal obsession &mdash; the way a single frame can hold an entire emotion, a whole memory, a lifetime of meaning.</p>
+        <p class="body-p">Over time, that passion grew into something more. Weddings, naming ceremonies, birthdays, corporate events &mdash; each one a new story waiting to be told through the lens. Today, Mone_can Photography brings that same sincerity and attention to every event across Goa.</p>
+        <p class="body-p">The second chapter came from cricket. A lifelong love of the sport led to a simple observation: Goa had only one flood light vendor for its cricket grounds and events. Arohan Rental was built to fill that gap &mdash; and to set a new standard for what professional event lighting looks like in the state.</p>
+        <blockquote class="story-quote">"I did not set out to build businesses. I set out to do things I genuinely cared about. The businesses followed."</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec bg-black">
+    <p class="label">Our Two Ventures</p>
+    <h2 class="sec-title">One Name. Two Stories.</h2>
+    <div class="ventures-grid">
+      <div class="venture-card">
+        <div class="v-icon"><svg><use href="#icon-camera"/></svg></div>
+        <h3><span class="brand-line1">Mone_can</span><span class="brand-line2">Photography</span></h3>
+        <p class="body-p">Born from a passion for clicking pictures, Mone_can Photography has grown into a trusted name for event photography in Goa. We specialise in weddings and ceremonies &mdash; events where the photographs will be looked at again and again for decades.</p>
+        <p class="body-p">Our approach is simple: be present, be patient, and never miss the moment that matters.</p>
+        <a href="photography.html" class="v-link">See Photography Services &rarr;</a>
+      </div>
+      <div class="venture-card venture-b">
+        <div class="v-icon"><svg><use href="#icon-floodlight"/></svg></div>
+        <h3><span class="brand-line1">Arohan Rental</span><span class="brand-line2">Floodlights</span></h3>
+        <p class="body-p">Arohan Rental entered the Goa market as the second flood light vendor in the state &mdash; and has since built a reputation for reliable equipment, professional setup and responsive service. From cricket grounds to large outdoor events, we light them right.</p>
+        <p class="body-p"><em>Bold. Bright. Reliable.</em> &mdash; That is not just a tagline. It is our promise.</p>
+        <a href="floodlights.html" class="v-link">See Lighting Services &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec bg-dark">
+    <p class="label">What We Stand For</p>
+    <h2 class="sec-title">Our Values</h2>
+    <div class="values-grid">
+      <div class="value-card"><h4>Genuine Passion</h4><p>Everything we do comes from real interest &mdash; not just a service to render. That shows in every result.</p></div>
+      <div class="value-card"><h4>Reliability</h4><p>We show up. Equipment works. Deadlines are met. For events with one chance to get it right, reliability is everything.</p></div>
+      <div class="value-card"><h4>Local Roots</h4><p>We understand Goa &mdash; its culture, its ceremonies, its pace. That context makes every photograph and light setup better.</p></div>
+      <div class="value-card"><h4>Honest Pricing</h4><p>No hidden charges, no surprises. You know exactly what you are paying for before we begin.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <div class="foot-biz">
+          <div class="foot-biz-item"><span class="fbl1">Mone_can</span><span class="fbl2">Photography</span></div>
+          <div class="foot-sep"></div>
+          <div class="foot-biz-item"><span class="fbl1">Arohan Rental</span><span class="fbl2">Flood Lights</span></div>
+        </div>
+        <p class="foot-loc">Goa, India</p>
+      </div>
+      <div class="foot-col"><p class="foot-title">Explore</p><a href="photography.html">Photography</a><a href="floodlights.html">Flood Lights</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+      <div class="foot-col"><p class="foot-title">Contact</p><a href="https://wa.me/919403238698">WhatsApp</a><a href="mailto:avishkarmone@gmail.com">Email</a><a href="https://www.instagram.com/mone_can_associates?igsh=MWljem05aXMyajg4dg==" target="_blank">Instagram</a><a href="https://www.facebook.com/share/1BWk7WVL8D/" target="_blank">Facebook</a></div>
+    </div>
+    <div class="foot-bottom">&copy; 2025 Mone_can &amp; Arohan Rental. All rights reserved.</div>
+  </footer>
+
+  <div class="quick-contact">
+    <a href="tel:+919403238698" class="qc-btn" title="Call us"><svg><use href="#icon-phone"/></svg></a>
+    <a href="mailto:avishkarmone@gmail.com" class="qc-btn" title="Email us"><svg><use href="#icon-mail"/></svg></a>
+    <a href="https://www.instagram.com/mone_can_associates?igsh=MWljem05aXMyajg4dg==" target="_blank" class="qc-btn" title="Instagram"><svg><use href="#icon-instagram"/></svg></a>
+    <a href="https://www.facebook.com/share/1BWk7WVL8D/" target="_blank" class="qc-btn" title="Facebook"><svg><use href="#icon-facebook"/></svg></a>
+  </div>
+  <a href="https://wa.me/919403238698" class="float-wa" target="_blank" title="WhatsApp"><svg><use href="#icon-whatsapp"/></svg></a>
+  <script src="script.js"></script>
+</body>
+</html>

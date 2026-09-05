@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photography | Mone_can & Arohan Rental</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+.sphere-wrap{position:relative;width:100%;height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:20px 0 8px}
+#sphere-container{position:relative;width:580px;height:580px;transform-style:preserve-3d;cursor:grab;user-select:none;flex-shrink:0}
+#sphere-container:active{cursor:grabbing}
+.tile{position:absolute;width:120px;height:82px;border-radius:9px;overflow:hidden;border:1.5px solid rgba(201,168,76,0.35);cursor:pointer;transition:border-color 0.3s,box-shadow 0.3s;backface-visibility:hidden}
+.tile:hover{border-color:#C9A84C;box-shadow:0 0 18px rgba(201,168,76,0.45)}
+.tile img{width:100%;height:100%;object-fit:cover;pointer-events:none;display:block}
+.tile-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#C9A84C;letter-spacing:1.5px;text-transform:uppercase}
+.tile-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 55%);opacity:0;transition:opacity 0.3s;display:flex;align-items:flex-end;padding:7px}
+.tile:hover .tile-ov{opacity:1}
+.tile-lbl{color:#C9A84C;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+#lightbox{position:absolute;inset:0;background:rgba(0,0,0,0.94);z-index:50;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;border-radius:12px;backdrop-filter:blur(6px)}
+#lightbox.open{display:flex}
+#lightbox img{max-width:75%;max-height:55%;border-radius:10px;border:1px solid rgba(201,168,76,0.35);object-fit:contain}
+#lb-placeholder{width:320px;height:220px;background:linear-gradient(135deg,#2a1a0a,#1a1a1a);border-radius:10px;border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;color:#C9A84C;font-size:13px;letter-spacing:1px}
+#lightbox-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#F5F0E8;text-align:center;margin-bottom:4px}
+#lightbox-desc{color:#999;font-size:13px;text-align:center}
+#lightbox-close{position:absolute;top:16px;right:16px;background:none;border:1px solid rgba(201,168,76,0.4);color:#C9A84C;width:36px;height:36px;border-radius:50%;font-size:16px;cursor:pointer;transition:background 0.3s}
+#lightbox-close:hover{background:rgba(201,168,76,0.15)}
+</style>
+</head>
+<body>
+  <svg style="display:none" aria-hidden="true">
+    <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.9c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1.1L6.6 10.8z"/></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+    <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8.5h-2c-.6 0-1 .5-1 1V12h3l-.4 3H12v7h-3v-7H7v-3h2V9c0-2.2 1.4-4 4-4h2v3.5z"/></symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M8.5 8.8c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.4.2.5.6 1.5.6 1.6.1.1.1.3 0 .4-.1.2-.2.3-.3.4-.1.2-.3.3-.1.6.2.4 1 1.5 2.1 2.1.3.2.5.1.6-.1.2-.2.5-.6.7-.8.2-.2.3-.2.5-.1.2.1 1.3.6 1.5.7.2.1.4.2.4.3.1.4 0 .8-.2 1.1-.2.3-1 .8-1.8.8-1.7 0-3.6-1.1-4.8-2.3-1.2-1.2-2-2.6-2-3.9 0-.5.1-.9.3-1.2z"/></symbol>
+    <symbol id="icon-camera" viewBox="0 0 100 100"><rect x="10" y="30" width="80" height="55" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M35 30 L42 18 H58 L65 30" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="50" cy="58" r="18" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="50" cy="58" r="8" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="78" cy="40" r="3" fill="currentColor"/></symbol>
+    <symbol id="icon-floodlight" viewBox="0 0 100 100"><rect x="28" y="42" width="44" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><line x1="50" y1="72" x2="50" y2="88" stroke="currentColor" stroke-width="3"/><line x1="34" y1="88" x2="66" y2="88" stroke="currentColor" stroke-width="3"/><path d="M28 48 L8 28 M50 42 L50 10 M72 48 L92 28" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="57" r="8" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  </svg>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo"><span class="nl-1">Mone_can</span><span class="nl-sep">&amp;</span><span class="nl-2">Arohan Rental</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="photography.html" class="active">Photography</a>
+      <a href="floodlights.html">Flood Lights</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Book Now</a>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="toggleMenu()">Home</a><a href="photography.html" onclick="toggleMenu()">Photography</a>
+    <a href="floodlights.html" onclick="toggleMenu()">Flood Lights</a><a href="about.html" onclick="toggleMenu()">About</a><a href="contact.html" onclick="toggleMenu()">Contact</a>
+  </div>
+
+  <section class="page-hero photo-hero">
+    <div class="hero-content">
+      <div class="brand-stack"><span class="brand-line1">Mone_can</span><span class="brand-line2">Photography</span></div>
+      <h1>Every Frame<br><em>Tells a Story</em></h1>
+      <p>Weddings &middot; Ceremonies &middot; Birthdays &middot; Corporate &middot; Pre-Wedding</p>
+    </div>
+  </section>
+
+  <section class="sec bg-dark">
+    <p class="label">What We Shoot</p>
+    <h2 class="sec-title">Our Photography Services</h2>
+    <div class="svc-grid">
+      <div class="svc-card"><div class="svc-n">01</div><h4>Wedding Photography</h4><p>Full-day coverage up to 12 hours. From morning rituals to the last dance — nothing is missed.</p><span class="svc-tag">Up to 12 hrs</span></div>
+      <div class="svc-card"><div class="svc-n">02</div><h4>Baby Naming Ceremony</h4><p>The first chapter of a new life. Soft, warm, intimate photography that honours this beautiful milestone.</p><span class="svc-tag">Half / Full Day</span></div>
+      <div class="svc-card"><div class="svc-n">03</div><h4>Thread &amp; Mundan Ceremony</h4><p>Traditional ceremonies deserve timeless photographs — rituals, emotions and family moments all captured.</p><span class="svc-tag">Half / Full Day</span></div>
+      <div class="svc-card"><div class="svc-n">04</div><h4>Bedding Ceremony</h4><p>An intimate and joyful celebration photographed with sensitivity and warmth.</p><span class="svc-tag">Half Day</span></div>
+      <div class="svc-card"><div class="svc-n">05</div><h4>Birthday Celebrations</h4><p>From a child's first birthday to milestone adult celebrations — every laugh and hug captured.</p><span class="svc-tag">Half / Full Day</span></div>
+      <div class="svc-card"><div class="svc-n">06</div><h4>Pre-Wedding Shoot</h4><p>Relaxed, creative sessions that tell your love story before the big day begins.</p><span class="svc-tag">Up to 6 hrs</span></div>
+      <div class="svc-card"><div class="svc-n">07</div><h4>Corporate Events</h4><p>Professional photography for launches, conferences, award nights and company milestones.</p><span class="svc-tag">Custom</span></div>
+      <div class="svc-card"><div class="svc-n">08</div><h4>Other Occasions</h4><p>Anniversary shoots, family portraits, product shoots — we are happy to discuss your needs.</p><span class="svc-tag">On Request</span></div>
+    </div>
+  </section>
+
+  <section class="sec bg-black">
+    <p class="label">Our Work</p>
+    <h2 class="sec-title">Portfolio</h2>
+    <p class="sec-sub">Drag the sphere to rotate &nbsp;·&nbsp; Click any photo to view it larger</p>
+
+    <div class="sphere-wrap">
+      <div id="sphere-container"></div>
+      <div id="lightbox">
+        <button id="lightbox-close" onclick="closeLightbox()">&#10005;</button>
+        <img id="lightbox-img" src="" alt="" style="display:none">
+        <div id="lb-placeholder"></div>
+        <div id="lightbox-info">
+          <div id="lightbox-title"></div>
+          <div id="lightbox-desc"></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="sec bg-dark">
+    <p class="label">Pricing</p>
+    <h2 class="sec-title">Photography Packages</h2>
+    <p class="sec-sub">All packages include professionally edited photographs delivered digitally.</p>
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <p class="pkg-label">Basic</p>
+        <div class="pkg-price">&#8377;75,000<span>onwards</span></div>
+        <ul><li>&#10003; Up to 6 hours coverage</li><li>&#10003; 1 professional photographer</li><li>&#10003; Fully edited photos</li><li>&#10003; Digital delivery</li><li>&#10003; Book up to 6 months prior</li></ul>
+        <a href="contact.html" class="pkg-btn outline">Enquire Now</a>
+      </div>
+      <div class="pkg-card pkg-feat">
+        <div class="pkg-badge">Most Chosen</div>
+        <p class="pkg-label">Premium</p>
+        <div class="pkg-price">&#8377;1,50,000<span>onwards</span></div>
+        <ul><li>&#10003; Up to 12 hours coverage</li><li>&#10003; Full wedding day coverage</li><li>&#10003; 500+ edited photos</li><li>&#10003; Digital delivery</li><li>&#10003; Priority booking slot</li></ul>
+        <a href="contact.html" class="pkg-btn gold">Book This</a>
+      </div>
+      <div class="pkg-card">
+        <p class="pkg-label">Custom</p>
+        <div class="pkg-price">Let's Talk<span>tailored for you</span></div>
+        <ul><li>&#10003; Any event type</li><li>&#10003; Flexible duration</li><li>&#10003; Mix and match add-ons</li><li>&#10003; Personal consultation</li><li>&#10003; Flexible scheduling</li></ul>
+        <a href="contact.html" class="pkg-btn outline">Get a Quote</a>
+      </div>
+    </div>
+    <div class="addons-box">
+      <h3>Available Add-ons</h3>
+      <div class="addons-row">
+        <div class="addon-tile"><p class="addon-name">Printed Photo Album</p><p class="addon-price">&#8377;8,000</p></div>
+        <div class="addon-tile"><p class="addon-name">Cinematic Reel</p><p class="addon-price">&#8377;3,000 &ndash; &#8377;5,000</p></div>
+        <div class="addon-tile"><p class="addon-name">Drone Photography</p><p class="addon-price">&#8377;12,000</p></div>
+        <div class="addon-tile"><p class="addon-name">Videography</p><p class="addon-price">&#8377;45,000 &ndash; &#8377;65,000</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec bg-black">
+    <p class="label">Estimate</p>
+    <h2 class="sec-title">Cost Calculator</h2>
+    <p class="sec-sub">Select your event details and get an instant price estimate. No commitment needed.</p>
+    <div class="calc-box">
+      <div class="calc-row">
+        <div class="calc-field"><label>Event Type</label>
+          <select id="eventType" onchange="calculate()">
+            <option value="wedding">Wedding</option>
+            <option value="naming">Baby Naming Ceremony</option>
+            <option value="thread">Thread / Mundan / Bedding</option>
+            <option value="birthday">Birthday Party</option>
+            <option value="prewedding">Pre-Wedding Shoot</option>
+            <option value="corporate">Corporate Event</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="calc-field"><label>Duration</label>
+          <select id="duration" onchange="calculate()">
+            <option value="half">Half Day (up to 6 hrs)</option>
+            <option value="full">Full Day (up to 12 hrs)</option>
+          </select>
+        </div>
+      </div>
+      <p class="addons-lbl">Add-ons (tick all that apply)</p>
+      <div class="addons-checks">
+        <label class="chk"><input type="checkbox" value="8000" onchange="calculate()"> Printed Album <em>+&#8377;8,000</em></label>
+        <label class="chk"><input type="checkbox" value="4000" onchange="calculate()"> Cinematic Reel <em>+&#8377;3k&ndash;5k</em></label>
+        <label class="chk"><input type="checkbox" value="12000" onchange="calculate()"> Drone Photography <em>+&#8377;12,000</em></label>
+        <label class="chk"><input type="checkbox" value="55000" onchange="calculate()"> Videography <em>+&#8377;45k&ndash;65k</em></label>
+      </div>
+      <div class="calc-result">
+        <div class="calc-result-text">
+          <p class="result-lbl">Estimated Range</p>
+          <p class="result-price" id="priceDisplay">&#8377;75,000 &ndash; &#8377;97,500</p>
+          <p class="result-note">Approximate range only. Final price confirmed after consultation.</p>
+        </div>
+        <a class="wa-calc" id="waCalcBtn" href="#" target="_blank">&#128247; Send on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking-strip">
+    <div class="booking-inner">
+      <div><h3>&#128197; How to Book</h3><p>We accept bookings up to <strong>6 months in advance</strong>. WhatsApp us or fill the contact form to get started.</p></div>
+      <a href="contact.html" class="btn-gold">Start Booking &rarr;</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <div class="foot-biz">
+          <div class="foot-biz-item"><span class="fbl1">Mone_can</span><span class="fbl2">Photography</span></div>
+          <div class="foot-sep"></div>
+          <div class="foot-biz-item"><span class="fbl1">Arohan Rental</span><span class="fbl2">Flood Lights</span></div>
+        </div>
+        <p class="foot-loc">Goa, India</p>
+      </div>
+      <div class="foot-col"><p class="foot-title">Explore</p><a href="photography.html">Photography</a><a href="floodlights.html">Flood Lights</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+      <div class="foot-col"><p class="foot-title">Contact</p><a href="https://wa.me/919403238698">WhatsApp</a><a href="mailto:avishkarclicks@gmail.com">Email</a><a href="https://www.instagram.com/mone_can_associates?igsh=MWljem05aXMyajg4dg==" target="_blank">Instagram</a><a href="https://www.facebook.com/share/1BWk7WVL8D/" target="_blank">Facebook</a></div>
+    </div>
+    <div class="foot-bottom">&copy; 2025 Mone_can &amp; Arohan Rental. All rights reserved.</div>
+  </footer>
+
+  <div class="quick-contact">
+    <a href="tel:+919403238698" class="qc-btn" title="Call us"><svg><use href="#icon-phone"/></svg></a>
+    <a href="mailto:avishkarclicks@gmail.com" class="qc-btn" title="Email us"><svg><use href="#icon-mail"/></svg></a>
+    <a href="https://www.instagram.com/mone_can_associates?igsh=MWljem05aXMyajg4dg==" target="_blank" class="qc-btn" title="Instagram"><svg><use href="#icon-instagram"/></svg></a>
+    <a href="https://www.facebook.com/share/1BWk7WVL8D/" target="_blank" class="qc-btn" title="Facebook"><svg><use href="#icon-facebook"/></svg></a>
+  </div>
+  <a href="https://wa.me/919403238698" class="float-wa" target="_blank" title="WhatsApp"><svg><use href="#icon-whatsapp"/></svg></a>
+  <script src="script.js"></script>
+<script>
+// ── SPHERE GALLERY ─────────────────────────────────────────────
+// To add real photos: replace src:'' with src:'images/wedding1.jpg' etc.
+var photos=[
+  {src:'images/engagement1.jpg',color:'#2a1608',label:'Engagement',desc:'Engagement Ceremony — Promises Begin'},
+  {src:'images/engagement2.jpg',color:'#0a1a2a',label:'Engagement',desc:'Engagement Ceremony — Promises Begin'},
+  {src:'images/engagement3.jpg',color:'#1a0a2a',label:'Engagement',desc:'Engagement Ceremony — Promises Begin'},
+  {src:'images/engagement4.jpg',color:'#0a2a1a',label:'Engagement',desc:'Engagement Ceremony — Promises Begin'},
+  {src:'images/engagement5.jpg',color:'#2a1515',label:'Engagement',desc:'Engagement Ceremony — Promises Begin'},
+  {src:'images/engagement6.jpg',color:'#1a2a08',label:'Engagement',desc:'Engagement Ceremony — Promises Begin'},
+  {src:'images/engagement7.jpg',color:'#2a0a18',label:'Engagement',desc:'Engagement Ceremony — Promises Begin'},
+  {src:'images/engagement8.jpg',color:'#0a2a2a',label:'Engagement',desc:'Engagement Ceremony — Promises Begin'},
+  {src:'images/engagement9.jpg',color:'#2a2208',label:'Engagement',desc:'Engagement Ceremony — Promises Begin'},
+  {src:'images/engagement10.jpg',color:'#181828',label:'Engagement',desc:'Engagement Ceremony — Promises Begin'},
+  {src:'images/baby1.jpg',color:'#2a0808',label:'Baby',desc:'Baby Ceremony — Precious Beginnings'},
+  {src:'images/portrait1.jpg',color:'#08082a',label:'Portrait',desc:'Portrait Session — Personal & Expressive'},
+  {src:'images/proposal1.jpg',color:'#182a2a',label:'Proposal',desc:'Proposal Moment — Where It All Began'},
+  {src:'images/proposal2.jpg',color:'#2a182a',label:'Proposal',desc:'Proposal Moment — Where It All Began'},
+  {src:'images/reception1.jpg',color:'#082a08',label:'Reception',desc:'Reception Night — Lights & Laughter'},
+  {src:'images/reception2.jpg',color:'#2a2a18',label:'Reception',desc:'Reception Night — Lights & Laughter'},
+  {src:'images/reception3.jpg',color:'#1a0808',label:'Reception',desc:'Reception Night — Lights & Laughter'},
+  {src:'images/reception4.jpg',color:'#081a1a',label:'Reception',desc:'Reception Night — Lights & Laughter'},
+  {src:'images/threadceremony1.jpg',color:'#2a082a',label:'Thread',desc:'Thread Ceremony — Traditional & Timeless'},
+  {src:'images/threadceremony2.jpg',color:'#082a18',label:'Thread',desc:'Thread Ceremony — Traditional & Timeless'},
+  {src:'images/wedding1.jpg',color:'#1a1a08',label:'Wedding',desc:'Wedding Photography — Full Day Coverage'},
+  {src:'images/wedding2.jpg',color:'#2a1808',label:'Wedding',desc:'Wedding Photography — Full Day Coverage'},
+  {src:'images/wedding3.jpg',color:'#08081a',label:'Wedding',desc:'Wedding Photography — Full Day Coverage'},
+  {src:'images/wedding4.jpg',color:'#1a2a18',label:'Wedding',desc:'Wedding Photography — Full Day Coverage'},
+  {src:'images/wedding5.jpg',color:'#2a1608',label:'Wedding',desc:'Wedding Photography — Full Day Coverage'},
+  {src:'images/wedding6.jpg',color:'#0a1a2a',label:'Wedding',desc:'Wedding Photography — Full Day Coverage'},
+  {src:'images/wedding7.jpg',color:'#1a0a2a',label:'Wedding',desc:'Wedding Photography — Full Day Coverage'},
+  {src:'images/wedding8.jpg',color:'#0a2a1a',label:'Wedding',desc:'Wedding Photography — Full Day Coverage'},
+];
+
+var cont=document.getElementById('sphere-container');
+if(cont){
+  var N=photos.length,R=220,tiles=[];
+  var goldenAngle=Math.PI*(3-Math.sqrt(5));
+  for(var i=0;i<N;i++){
+    var yp=1-(i/(N-1))*2,r=Math.sqrt(1-yp*yp),theta=goldenAngle*i;
+    var xp=Math.cos(theta)*r,zp=Math.sin(theta)*r;
+    var tile=document.createElement('div');
+    tile.className='tile';
+    tile.dataset.index=i;
+    var ph=photos[i];
+    if(ph.src){
+      var im=document.createElement('img');im.src=ph.src;im.alt=ph.label;tile.appendChild(im);
+    }else{
+      var phd=document.createElement('div');phd.className='tile-ph';
+      phd.style.background='linear-gradient(135deg,'+ph.color+' 0%,#141414 100%)';
+      phd.textContent=ph.label;tile.appendChild(phd);
+    }
+    var ov=document.createElement('div');ov.className='tile-ov';
+    var lb=document.createElement('span');lb.className='tile-lbl';lb.textContent=ph.label;
+    ov.appendChild(lb);tile.appendChild(ov);
+    (function(idx){tile.addEventListener('click',function(){if(!isDragging)openLB(idx);});})(i);
+    cont.appendChild(tile);
+    tiles.push({el:tile,ox:xp*R,oy:yp*R,oz:zp*R});
+  }
+  var rotX=0.3,rotY=0,velX=0,velY=0.003,isDragging=false,lastMX=0,lastMY=0,dsx=0,dsy=0;
+  cont.addEventListener('mousedown',function(e){dsx=e.clientX;dsy=e.clientY;lastMX=e.clientX;lastMY=e.clientY;velX=0;velY=0;e.preventDefault();});
+  document.addEventListener('mousemove',function(e){
+    if(!e.buttons)return;
+    var dx=e.clientX-lastMX,dy=e.clientY-lastMY;
+    if(Math.abs(e.clientX-dsx)>4||Math.abs(e.clientY-dsy)>4)isDragging=true;
+    rotY+=dx*0.008;rotX+=dy*0.008;velY=dx*0.006;velX=dy*0.006;lastMX=e.clientX;lastMY=e.clientY;
+  });
+  document.addEventListener('mouseup',function(){setTimeout(function(){isDragging=false;},50);});
+  cont.addEventListener('touchstart',function(e){dsx=e.touches[0].clientX;dsy=e.touches[0].clientY;lastMX=dsx;lastMY=dsy;velX=0;velY=0;},{passive:true});
+  cont.addEventListener('touchmove',function(e){
+    var dx=e.touches[0].clientX-lastMX,dy=e.touches[0].clientY-lastMY;
+    if(Math.abs(e.touches[0].clientX-dsx)>4)isDragging=true;
+    rotY+=dx*0.008;rotX+=dy*0.008;velY=dx*0.005;velX=dy*0.005;lastMX=e.touches[0].clientX;lastMY=e.touches[0].clientY;
+  },{passive:true});
+  cont.addEventListener('touchend',function(){setTimeout(function(){isDragging=false;},80);});
+  function rot3d(x,y,z,rx,ry){
+    var cy=Math.cos(ry),sy=Math.sin(ry),cx=Math.cos(rx),sx=Math.sin(rx);
+    var x1=x*cy+z*sy,z1=-x*sy+z*cy,y1=y*cx-z1*sx,z2=y*sx+z1*cx;
+    return{x:x1,y:y1,z:z2};
+  }
+  function render(){
+    if(!isDragging){velY*=0.97;velX*=0.95;rotY+=velY;rotX+=velX;}
+    var cx=290,cy=290,fov=650;
+    for(var i=0;i<tiles.length;i++){
+      var t=tiles[i],pt=rot3d(t.ox,t.oy,t.oz,rotX,rotY);
+      var sc=fov/(fov+pt.z),sx=cx+pt.x*sc-60,sy=cy+pt.y*sc-41;
+      var dep=(pt.z+R)/(2*R),op=0.25+dep*0.75,ts=0.55+dep*0.5;
+      t.el.style.transform='translate('+sx+'px,'+sy+'px) scale('+(sc*ts)+')';
+      t.el.style.opacity=op;
+      t.el.style.zIndex=Math.round(pt.z+R);
+    }
+    requestAnimationFrame(render);
+  }
+  render();
+}
+
+function openLB(idx){
+  var ph=photos[idx];
+  var lb=document.getElementById('lightbox');
+  var img=document.getElementById('lightbox-img');
+  var plc=document.getElementById('lb-placeholder');
+  if(ph.src){img.src=ph.src;img.style.display='block';plc.style.display='none';}
+  else{img.style.display='none';plc.style.display='flex';plc.textContent=ph.label;}
+  document.getElementById('lightbox-title').textContent=ph.label;
+  document.getElementById('lightbox-desc').textContent=ph.desc;
+  lb.classList.add('open');
+}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
+</script>
+</body>
+</html>
